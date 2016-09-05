@@ -15,7 +15,7 @@ def programName = "Jource"
 def repoName = "Main"
 def repoPackageName = "java-api"
 def programLicense = "MIT"
-def versionControlURL = "https://github.com/SocraticPhoenix/PlasmaSource.git"
+def versionControlURL = "https://github.com/PlutoPowered/Jource"
 //End Variables
 
 //Gradle Variables
