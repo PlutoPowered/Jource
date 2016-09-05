@@ -1,0 +1,10 @@
+#Directories
+.idea/
+.gradle/
+build/
+out/
+run/
+
+#Files
+gradle.properties
+*.iml
