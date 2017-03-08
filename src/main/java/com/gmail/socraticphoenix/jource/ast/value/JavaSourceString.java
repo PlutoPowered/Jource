@@ -23,7 +23,7 @@ package com.gmail.socraticphoenix.jource.ast.value;
 
 import com.gmail.socraticphoenix.jource.ast.JavaSourceContext;
 import com.gmail.socraticphoenix.jource.ast.type.JavaSourceNamespace;
-import com.gmail.socraticphoenix.jource.util.Utils;
+import com.gmail.socraticphoenix.parse.Strings;
 
 import java.util.Collections;
 import java.util.List;
@@ -41,7 +41,7 @@ public class JavaSourceString implements JavaSourceLiteral<String> {
 
     @Override
     public String write(int indent, JavaSourceContext context) {
-        return "\"" + Utils.escape(this.val) + "\"";
+        return "\"" + Strings.escape(this.val) + "\"";
     }
 
     @Override

@@ -24,7 +24,7 @@ package com.gmail.socraticphoenix.jource.ast.block;
 import com.gmail.socraticphoenix.jource.ast.JavaSourceContext;
 import com.gmail.socraticphoenix.jource.ast.statement.JavaSourceStatement;
 import com.gmail.socraticphoenix.jource.ast.type.JavaSourceNamespace;
-import com.gmail.socraticphoenix.jource.util.Utils;
+import com.gmail.socraticphoenix.parse.Strings;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,8 +61,8 @@ public abstract class AbstractJavaSourceBlock<T extends AbstractJavaSourceBlock<
 
     public final String writeStatements(int indent, JavaSourceContext context, String header, String footer) {
         StringBuilder builder = new StringBuilder();
-        String ind = Utils.indent(indent);
-        String ind2 = Utils.indent(indent + 1);
+        String ind = Strings.indent(indent);
+        String ind2 = Strings.indent(indent + 1);
         String ls = System.lineSeparator();
         builder.append(header).append(!header.equals("") ? " " : "").append("{").append(ls);
         this.statements.forEach(statement -> builder.append(ind2).append(statement.write(indent + 1, context)).append(statement.requiresSemiColon() ? ";" : "").append(ls));

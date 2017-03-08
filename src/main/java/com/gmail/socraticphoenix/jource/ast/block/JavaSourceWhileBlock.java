@@ -23,7 +23,7 @@ package com.gmail.socraticphoenix.jource.ast.block;
 
 import com.gmail.socraticphoenix.jource.ast.JavaSourceContext;
 import com.gmail.socraticphoenix.jource.ast.value.JavaSourceValue;
-import com.gmail.socraticphoenix.jource.util.Utils;
+import com.gmail.socraticphoenix.parse.Strings;
 
 public class JavaSourceWhileBlock extends AbstractJavaSourceBlock<JavaSourceWhileBlock> {
     private String name;
@@ -61,7 +61,7 @@ public class JavaSourceWhileBlock extends AbstractJavaSourceBlock<JavaSourceWhil
     public String write(int indent, JavaSourceContext context) {
         StringBuilder header = new StringBuilder();
         if(!this.name.equals("")) {
-            header.append(this.name).append(":").append(System.lineSeparator()).append(Utils.indent(indent));
+            header.append(this.name).append(":").append(System.lineSeparator()).append(Strings.indent(indent));
         }
 
         if(this.isDo) {

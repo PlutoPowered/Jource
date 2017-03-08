@@ -108,6 +108,10 @@ public class JavaSourceFilledGenerics implements JavaSourceWritable, JavaSourceT
             this.annotations = new ArrayList<>();
         }
 
+        public JavaSourceNamespace.Filled type() {
+            return this.type;
+        }
+
         @Override
         public Collection<JavaSourceAnnotation> annotations() {
             return this.annotations;

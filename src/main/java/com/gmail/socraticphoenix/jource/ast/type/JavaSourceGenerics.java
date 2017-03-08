@@ -24,9 +24,9 @@ package com.gmail.socraticphoenix.jource.ast.type;
 import com.gmail.socraticphoenix.jource.ast.JavaSourceContext;
 import com.gmail.socraticphoenix.jource.ast.JavaSourceTyped;
 import com.gmail.socraticphoenix.jource.ast.JavaSourceWritable;
+import com.gmail.socraticphoenix.jource.ast.annotation.JavaSourceAnnotatable;
 import com.gmail.socraticphoenix.jource.ast.annotation.JavaSourceAnnotation;
 import com.gmail.socraticphoenix.jource.ast.value.JavaSourceLiteral;
-import com.gmail.socraticphoenix.jource.ast.annotation.JavaSourceAnnotatable;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;

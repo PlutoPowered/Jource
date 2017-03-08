@@ -22,9 +22,9 @@
 package com.gmail.socraticphoenix.jource.ast.value;
 
 import com.gmail.socraticphoenix.jource.ast.JavaSourceContext;
+import com.gmail.socraticphoenix.jource.ast.statement.JavaSourceStatement;
 import com.gmail.socraticphoenix.jource.ast.type.JavaSourceNamespace;
 import com.gmail.socraticphoenix.jource.ast.value.operator.JavaSourceOperator;
-import com.gmail.socraticphoenix.jource.ast.statement.JavaSourceStatement;
 
 import java.util.List;
 

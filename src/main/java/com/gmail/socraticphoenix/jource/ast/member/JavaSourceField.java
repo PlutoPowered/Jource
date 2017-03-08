@@ -22,16 +22,16 @@
 package com.gmail.socraticphoenix.jource.ast.member;
 
 import com.gmail.socraticphoenix.jource.ast.JavaSourceContext;
-import com.gmail.socraticphoenix.jource.ast.annotation.JavaSourceAnnotation;
-import com.gmail.socraticphoenix.jource.ast.modifier.JavaSourceModifiable;
-import com.gmail.socraticphoenix.jource.ast.type.JavaSourceNamespace;
-import com.gmail.socraticphoenix.jource.util.Utils;
 import com.gmail.socraticphoenix.jource.ast.JavaSourceTyped;
 import com.gmail.socraticphoenix.jource.ast.JavaSourceWritable;
 import com.gmail.socraticphoenix.jource.ast.annotation.JavaSourceAnnotatable;
+import com.gmail.socraticphoenix.jource.ast.annotation.JavaSourceAnnotation;
+import com.gmail.socraticphoenix.jource.ast.modifier.JavaSourceModifiable;
 import com.gmail.socraticphoenix.jource.ast.modifier.JavaSourceModifier;
+import com.gmail.socraticphoenix.jource.ast.type.JavaSourceNamespace;
 import com.gmail.socraticphoenix.jource.ast.value.JavaSourceNull;
 import com.gmail.socraticphoenix.jource.ast.value.JavaSourceValue;
+import com.gmail.socraticphoenix.parse.Strings;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -70,7 +70,7 @@ public class JavaSourceField implements JavaSourceTyped, JavaSourceWritable, Jav
     public String write(int indent, JavaSourceContext context) {
         StringBuilder builder = new StringBuilder();
         String ls = System.lineSeparator();
-        String ind = Utils.indent(indent);
+        String ind = Strings.indent(indent);
         this.annotations.forEach(annotation -> builder.append(annotation.write(indent + 1, context)).append(ls).append(ind));
         this.modifiers.forEach(modifier -> builder.append(modifier.getName()).append(" "));
         builder.append(this.type.write(indent + 1, context)).append(this.name).append(" = ").append(this.value.write(indent + 1, context));

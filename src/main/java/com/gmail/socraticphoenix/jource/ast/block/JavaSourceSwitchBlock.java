@@ -25,7 +25,7 @@ import com.gmail.socraticphoenix.jource.ast.JavaSourceContext;
 import com.gmail.socraticphoenix.jource.ast.statement.JavaSourceStatement;
 import com.gmail.socraticphoenix.jource.ast.type.JavaSourceNamespace;
 import com.gmail.socraticphoenix.jource.ast.value.JavaSourceValue;
-import com.gmail.socraticphoenix.jource.util.Utils;
+import com.gmail.socraticphoenix.parse.Strings;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -65,9 +65,9 @@ public class JavaSourceSwitchBlock implements JavaSourceStatement {
     @Override
     public String write(int indent, JavaSourceContext context) {
         StringBuilder builder = new StringBuilder();
-        String ind = Utils.indent(indent);
-        String ind2 = Utils.indent(indent + 1);
-        String ind3 = Utils.indent(indent + 2);
+        String ind = Strings.indent(indent);
+        String ind2 = Strings.indent(indent + 1);
+        String ind3 = Strings.indent(indent + 2);
         String ls = System.lineSeparator();
         if(this.name != null) {
             builder.append(this.name).append(":").append(ls).append(ind);

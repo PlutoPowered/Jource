@@ -19,49 +19,22 @@
  * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package com.gmail.socraticphoenix.jource.ast.statement;
+package com.gmail.socraticphoenix.jource.io;
 
 import com.gmail.socraticphoenix.jource.ast.JavaSourceContext;
 import com.gmail.socraticphoenix.jource.ast.type.JavaSourceNamespace;
-import com.gmail.socraticphoenix.jource.ast.value.JavaSourceValue;
-import com.gmail.socraticphoenix.jource.ast.value.operator.JavaSourceOperator;
 
-import java.util.List;
+import java.util.Collection;
 
-public class JavaSourcePostfixStatement implements JavaSourceStatement {
-    private JavaSourceValue target;
-    private JavaSourceOperator operator;
+public class JavaSourceExclusionContext implements JavaSourceContext {
+    private Collection<JavaSourceNamespace> exclude;
 
-    public JavaSourcePostfixStatement(JavaSourceValue target, JavaSourceOperator operator) {
-        if(!operator.isPostfix()) {
-            throw new IllegalArgumentException("Operator is not postfix");
-        }
-
-        this.target = target;
-        this.operator = operator;
-    }
-
-    public static JavaSourcePostfixStatement of(JavaSourceValue value, JavaSourceOperator operator) {
-        return new JavaSourcePostfixStatement(value, operator);
+    public JavaSourceExclusionContext(Collection<JavaSourceNamespace> exclude) {
+        this.exclude = exclude;
     }
 
     @Override
-    public String write(int indent, JavaSourceContext context) {
-        return target.write(indent + 1, context) + this.operator.getRep();
-    }
-
-    @Override
-    public boolean usesIndents() {
-        return false;
-    }
-
-    @Override
-    public List<JavaSourceNamespace> associatedTypes() {
-        return this.target.associatedTypes();
-    }
-
-    @Override
-    public boolean requiresSemiColon() {
-        return true;
+    public String nameOf(JavaSourceNamespace namespace) {
+        return this.exclude.contains(namespace) ? namespace.getQualifiedName() : namespace.getSimpleName();
     }
 }

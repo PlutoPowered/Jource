@@ -23,7 +23,7 @@ package com.gmail.socraticphoenix.jource.ast.type;
 
 import com.gmail.socraticphoenix.jource.ast.JavaSourceContext;
 import com.gmail.socraticphoenix.jource.ast.JavaSourceWritable;
-import com.gmail.socraticphoenix.jource.util.Utils;
+import com.gmail.socraticphoenix.mirror.Reflections;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -158,7 +158,7 @@ public class JavaSourceNamespace implements JavaSourceWritable {
                 s = s.substring(0, s.length() - 1);
             }
         }
-        return new JavaSourceNamespace(s, array, innerNesting, resolveClass ? Utils.resolveClass(s).orElse(null) : null, generics);
+        return new JavaSourceNamespace(s, array, innerNesting, resolveClass ? Reflections.resolveClass(s).orElse(null) : null, generics);
     }
 
     public Optional<Class> getRepresented() {

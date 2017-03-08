@@ -21,5 +21,27 @@
  */
 package com.gmail.socraticphoenix.jource.io;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 public class JavaSourceFileSet {
+    private List<JavaSourceFile> files;
+
+    public JavaSourceFileSet() {
+        this.files = new ArrayList<>();
+    }
+
+    public JavaSourceFileSet add(JavaSourceFile file) {
+        this.files.add(file);
+        return this;
+    }
+
+    public void write(File dir) throws IOException {
+        for(JavaSourceFile file : this.files) {
+            file.writeAt(dir);
+        }
+    }
+
 }

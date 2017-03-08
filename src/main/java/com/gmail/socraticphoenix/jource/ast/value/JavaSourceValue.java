@@ -22,8 +22,8 @@
 package com.gmail.socraticphoenix.jource.ast.value;
 
 import com.gmail.socraticphoenix.jource.ast.JavaSourceTyped;
-import com.gmail.socraticphoenix.jource.ast.type.JavaSourceNamespace;
 import com.gmail.socraticphoenix.jource.ast.JavaSourceWritable;
+import com.gmail.socraticphoenix.jource.ast.type.JavaSourceNamespace;
 
 public interface JavaSourceValue extends JavaSourceTyped, JavaSourceWritable {
 

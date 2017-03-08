@@ -23,13 +23,13 @@ package com.gmail.socraticphoenix.jource.ast.definition;
 
 import com.gmail.socraticphoenix.jource.ast.JavaSourceContext;
 import com.gmail.socraticphoenix.jource.ast.member.JavaSourceField;
-import com.gmail.socraticphoenix.jource.ast.member.JavaSourceMethod;
-import com.gmail.socraticphoenix.jource.ast.type.JavaSourceNamespace;
-import com.gmail.socraticphoenix.jource.util.Utils;
 import com.gmail.socraticphoenix.jource.ast.member.JavaSourceInitializer;
+import com.gmail.socraticphoenix.jource.ast.member.JavaSourceMethod;
 import com.gmail.socraticphoenix.jource.ast.member.JavaSourceParameter;
 import com.gmail.socraticphoenix.jource.ast.member.JavaSourceStaticInitializer;
+import com.gmail.socraticphoenix.jource.ast.type.JavaSourceNamespace;
 import com.gmail.socraticphoenix.jource.ast.value.JavaSourceValue;
+import com.gmail.socraticphoenix.parse.Strings;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -119,8 +119,8 @@ public class JavaSourceAnonymousClass implements JavaSourceValue {
     @Override
     public String write(int indent, JavaSourceContext context) {
         StringBuilder builder = new StringBuilder();
-        String ind = Utils.indent(indent);
-        String ind2 = Utils.indent(indent + 1);
+        String ind = Strings.indent(indent);
+        String ind2 = Strings.indent(indent + 1);
         String ls = System.lineSeparator();
 
         builder.append("new ").append(this.superclass.write(indent + 1, context)).append("(");

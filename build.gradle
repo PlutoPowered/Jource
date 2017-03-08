@@ -9,7 +9,7 @@ apply plugin: 'idea'
 //End Plugins
 
 //Program Specific Variables (Fill thses in)
-def programVersion = "0.0.3"
+def programVersion = "0.0.2"
 def programGroup = "com.gmail.socraticphoenix"
 def programName = "Jource"
 def repoName = "Main"
@@ -34,10 +34,15 @@ configurations {
 //Repositories and Dependencies (Fill these in)
 repositories {
     mavenCentral()
+    maven {
+        name 'My Repo'
+        url 'https://dl.bintray.com/meguy26/Main'
+    }
 }
 
 dependencies {
-
+    compile "com.gmail.socraticphoenix:Parse:0.0.1"
+    compile "com.gmail.socraticphoenix:Mirror:0.0.0"
 }
 //End Repositories and Dependencies
 

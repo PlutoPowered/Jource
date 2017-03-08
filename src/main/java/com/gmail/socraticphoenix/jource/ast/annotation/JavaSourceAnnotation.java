@@ -22,12 +22,12 @@
 package com.gmail.socraticphoenix.jource.ast.annotation;
 
 import com.gmail.socraticphoenix.jource.ast.JavaSourceContext;
-import com.gmail.socraticphoenix.jource.ast.type.JavaSourceNamespace;
-import com.gmail.socraticphoenix.jource.util.Utils;
 import com.gmail.socraticphoenix.jource.ast.JavaSourceTyped;
 import com.gmail.socraticphoenix.jource.ast.JavaSourceWritable;
 import com.gmail.socraticphoenix.jource.ast.type.JavaSourceGenerics;
+import com.gmail.socraticphoenix.jource.ast.type.JavaSourceNamespace;
 import com.gmail.socraticphoenix.jource.ast.value.JavaSourceNull;
+import com.gmail.socraticphoenix.mirror.Reflections;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -43,7 +43,7 @@ public class JavaSourceAnnotation implements JavaSourceTyped, JavaSourceWritable
     private Map<String, JavaSourceAnnotationValue> values;
 
     public JavaSourceAnnotation(String name) {
-        Class<?> c = Utils.resolveClass(name).orElse(null);
+        Class<?> c = Reflections.resolveClass(name).orElse(null);
         if (c != null && !Annotation.class.isAssignableFrom(c)) {
             throw new IllegalArgumentException(name + " is not an Annotation");
         }

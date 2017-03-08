@@ -21,8 +21,8 @@
  */
 package com.gmail.socraticphoenix.jource.ast.value;
 
-import com.gmail.socraticphoenix.jource.ast.type.JavaSourceNamespace;
 import com.gmail.socraticphoenix.jource.ast.annotation.JavaSourceAnnotationValue;
+import com.gmail.socraticphoenix.jource.ast.type.JavaSourceNamespace;
 
 import java.lang.reflect.Array;
 

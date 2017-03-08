@@ -21,8 +21,8 @@
  */
 package com.gmail.socraticphoenix.jource.ast.value;
 
-import com.gmail.socraticphoenix.jource.ast.type.JavaSourceNamespace;
 import com.gmail.socraticphoenix.jource.ast.JavaSourceContext;
+import com.gmail.socraticphoenix.jource.ast.type.JavaSourceNamespace;
 
 import java.util.ArrayList;
 import java.util.Collections;

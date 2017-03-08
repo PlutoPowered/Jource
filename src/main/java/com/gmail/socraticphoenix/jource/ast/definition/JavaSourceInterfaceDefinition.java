@@ -24,13 +24,13 @@ package com.gmail.socraticphoenix.jource.ast.definition;
 import com.gmail.socraticphoenix.jource.ast.JavaSourceContext;
 import com.gmail.socraticphoenix.jource.ast.member.JavaSourceConstructor;
 import com.gmail.socraticphoenix.jource.ast.member.JavaSourceField;
-import com.gmail.socraticphoenix.jource.ast.member.JavaSourceMethod;
-import com.gmail.socraticphoenix.jource.ast.modifier.JavaSourceModifier;
-import com.gmail.socraticphoenix.jource.ast.type.JavaSourceNamespace;
-import com.gmail.socraticphoenix.jource.util.Utils;
 import com.gmail.socraticphoenix.jource.ast.member.JavaSourceInitializer;
+import com.gmail.socraticphoenix.jource.ast.member.JavaSourceMethod;
 import com.gmail.socraticphoenix.jource.ast.member.JavaSourceStaticInitializer;
+import com.gmail.socraticphoenix.jource.ast.modifier.JavaSourceModifier;
 import com.gmail.socraticphoenix.jource.ast.type.JavaSourceGenerics;
+import com.gmail.socraticphoenix.jource.ast.type.JavaSourceNamespace;
+import com.gmail.socraticphoenix.parse.Strings;
 
 import java.util.Collection;
 
@@ -111,8 +111,8 @@ public class JavaSourceInterfaceDefinition extends AbstractJavaSourceDefinition<
     @Override
     public String write(int indent, JavaSourceContext context) {
         StringBuilder builder = new StringBuilder();
-        String ind = Utils.indent(indent);
-        String ind2 = Utils.indent(indent + 1);
+        String ind = Strings.indent(indent);
+        String ind2 = Strings.indent(indent + 1);
         String ls = System.lineSeparator();
 
         this.annotations().forEach(annotation -> builder.append(annotation.write(indent + 1, context)).append(ls).append(ind));

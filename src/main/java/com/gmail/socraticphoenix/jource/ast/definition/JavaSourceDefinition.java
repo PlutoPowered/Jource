@@ -22,7 +22,6 @@
 package com.gmail.socraticphoenix.jource.ast.definition;
 
 
-import com.gmail.socraticphoenix.jource.ast.type.JavaSourceNamespace;
 import com.gmail.socraticphoenix.jource.ast.JavaSourceTyped;
 import com.gmail.socraticphoenix.jource.ast.JavaSourceWritable;
 import com.gmail.socraticphoenix.jource.ast.annotation.JavaSourceAnnotatable;
@@ -32,6 +31,7 @@ import com.gmail.socraticphoenix.jource.ast.member.JavaSourceInitializer;
 import com.gmail.socraticphoenix.jource.ast.member.JavaSourceMethod;
 import com.gmail.socraticphoenix.jource.ast.member.JavaSourceStaticInitializer;
 import com.gmail.socraticphoenix.jource.ast.modifier.JavaSourceModifiable;
+import com.gmail.socraticphoenix.jource.ast.type.JavaSourceNamespace;
 
 import java.util.Collection;
 
