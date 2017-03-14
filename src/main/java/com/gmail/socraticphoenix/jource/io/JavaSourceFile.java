@@ -104,7 +104,7 @@ public class JavaSourceFile {
 
     public void writeAt(File dir) throws IOException {
         File target = new File(dir, Strings.glue(File.separator, (Object[]) this.main.name().getPath()));
-        this.writeTo(dir);
+        this.writeTo(target);
     }
 
 }

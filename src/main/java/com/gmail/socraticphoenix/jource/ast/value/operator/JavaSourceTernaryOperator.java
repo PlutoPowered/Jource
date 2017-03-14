@@ -59,6 +59,6 @@ public class JavaSourceTernaryOperator implements JavaSourceValue {
 
     @Override
     public JavaSourceNamespace type() {
-        return null;
+        return JavaSourceNamespace.UNKNOWN;
     }
 }

@@ -54,7 +54,7 @@ public class JavaSourceClassReference implements JavaSourceLiteral<Class> {
 
     @Override
     public Class value() {
-        return null;
+        return this.target.getRepresented().orElse(null);
     }
 
 }
