@@ -41,16 +41,26 @@ public class JavaSourceParameter implements JavaSourceAnnotatable<JavaSourcePara
     private Set<JavaSourceModifier> modifiers;
     private JavaSourceNamespace type;
     private String name;
+    private boolean isVarArgs;
 
-    public JavaSourceParameter(JavaSourceNamespace type, String name) {
+    public JavaSourceParameter(JavaSourceNamespace type, String name, boolean isVarArgs) {
         this.type = type;
         this.name = name;
         this.annotations = new ArrayList<>();
         this.modifiers = new LinkedHashSet<>();
+        this.isVarArgs = isVarArgs;
+
+        if (type.getArray() == 0 && isVarArgs) {
+            throw new IllegalArgumentException("Variable argument parameter must have array type");
+        }
+    }
+
+    public static JavaSourceParameter of(JavaSourceNamespace type, String name, boolean isVarArgs) {
+        return new JavaSourceParameter(type, name, isVarArgs);
     }
 
     public static JavaSourceParameter of(JavaSourceNamespace type, String name) {
-        return new JavaSourceParameter(type, name);
+        return of(type, name, false);
     }
 
     @Override
@@ -58,7 +68,7 @@ public class JavaSourceParameter implements JavaSourceAnnotatable<JavaSourcePara
         StringBuilder builder = new StringBuilder();
         this.annotations().forEach(annotation -> builder.append(annotation.write(indent + 1, context)).append(" "));
         this.modifiers.forEach(modifier -> builder.append(modifier.getName()).append(" "));
-        builder.append(this.type.write(indent + 1, context)).append(" ").append(this.name);
+        builder.append(this.type.write(indent + 1, context)).append(this.isVarArgs ? "..." : "").append(" ").append(this.name);
         return builder.toString();
     }
 
