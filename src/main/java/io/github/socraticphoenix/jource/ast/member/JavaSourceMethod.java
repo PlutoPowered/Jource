@@ -46,6 +46,7 @@ public class JavaSourceMethod extends AbstractJavaSourceTopBlock<JavaSourceMetho
     private JavaSourceNamespace.Filled returnType;
     private String name;
     private List<JavaSourceParameter> parameters;
+    private List<JavaSourceNamespace.Filled> throwables;
     private JavaSourceValue defaultValue;
 
     public JavaSourceMethod(JavaSourceGenerics generics, JavaSourceNamespace.Filled returnType, String name, JavaSourceValue defaultValue) {
@@ -55,6 +56,7 @@ public class JavaSourceMethod extends AbstractJavaSourceTopBlock<JavaSourceMetho
         this.modifiers = new LinkedHashSet<>();
         this.parameters = new ArrayList<>();
         this.annotations = new ArrayList<>();
+        this.throwables = new ArrayList<>();
     }
 
     public static JavaSourceMethod of(JavaSourceGenerics generics, JavaSourceNamespace.Filled returnType, String name, JavaSourceValue defaultValue) {
@@ -96,6 +98,10 @@ public class JavaSourceMethod extends AbstractJavaSourceTopBlock<JavaSourceMetho
             }
         }
         builder.append(")");
+
+        if (!this.throwables.isEmpty()) {
+            builder.append(" throws ").append(String.join(", ", this.throwables.stream().map(t -> t.write(indent + 1, context)).toArray(String[]::new)));
+        }
 
         if (context.isInterface()) {
             if (context.isAnnotation()) {
@@ -144,4 +150,14 @@ public class JavaSourceMethod extends AbstractJavaSourceTopBlock<JavaSourceMetho
         this.annotations.add(annotation);
         return this;
     }
+
+    public Collection<JavaSourceNamespace.Filled> throwables() {
+        return this.throwables;
+    }
+
+    public JavaSourceMethod addThrowable(JavaSourceNamespace.Filled throwable) {
+        this.throwables.add(throwable);
+        return this;
+    }
+
 }
