@@ -31,6 +31,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -58,7 +59,11 @@ public class JavaSourceFile {
         List<JavaSourceNamespace> associated = main.associatedTypes();
         this.additional.forEach(s -> associated.addAll(s.associatedTypes()));
         for (JavaSourceNamespace sourceNamespace : associated) {
-            if(!sourceNamespace.isPrimitive() && !this.imports.contains(sourceNamespace) && !this.literals.contains(sourceNamespace)) {
+            if (sourceNamespace.getArray() != 0) {
+                sourceNamespace = sourceNamespace.array(0);
+            }
+
+            if(!sourceNamespace.isPrimitive() && sourceNamespace.getRepresented().isPresent() && !Arrays.equals(sourceNamespace.getPackage(), new String[] {"java", "lang"})) {
                 if (!imports.contains(sourceNamespace.getSimpleName())) {
                     this.imports.add(sourceNamespace);
                     imports.add(sourceNamespace.getSimpleName());
@@ -86,6 +91,7 @@ public class JavaSourceFile {
         StringBuilder builder = new StringBuilder();
         builder.append(this.main.name().toPackageStatement()).append(";").append(System.lineSeparator()).append(System.lineSeparator());
         this.imports.forEach(jcn -> builder.append(jcn.toImportStatement()).append(";").append(System.lineSeparator()));
+        builder.append(System.lineSeparator());
         builder.append(this.main.write(indent, context));
         builder.append(System.lineSeparator());
         this.additional.forEach(jsd -> {

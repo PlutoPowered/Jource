@@ -27,8 +27,6 @@ import io.github.socraticphoenix.jource.ast.type.JavaSourceNamespace;
 import java.util.Collections;
 import java.util.List;
 
-import static javafx.scene.input.KeyCode.F;
-
 public class JavaSourceFloat implements JavaSourceLiteral<Float> {
     private Float val;
 
@@ -42,7 +40,7 @@ public class JavaSourceFloat implements JavaSourceLiteral<Float> {
 
     @Override
     public String write(int indent, JavaSourceContext context) {
-        return String.valueOf(this.val) + F;
+        return String.valueOf(this.val) + "F";
     }
 
     @Override
