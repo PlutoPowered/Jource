@@ -68,7 +68,7 @@ public class JavaSourceParameter implements JavaSourceAnnotatable<JavaSourcePara
         StringBuilder builder = new StringBuilder();
         this.annotations().forEach(annotation -> builder.append(annotation.write(indent + 1, context)).append(" "));
         this.modifiers.forEach(modifier -> builder.append(modifier.getName()).append(" "));
-        builder.append(this.type.write(indent + 1, context)).append(this.isVarArgs ? "..." : "").append(" ").append(this.name);
+        builder.append(this.isVarArgs? this.type.array(this.type.getArray() - 1).write(indent + 1, context) : this.type.write(indent + 1, context)).append(this.isVarArgs ? "..." : "").append(" ").append(this.name);
         return builder.toString();
     }
 
