@@ -90,7 +90,12 @@ public class JavaSourceMethod extends AbstractJavaSourceTopBlock<JavaSourceMetho
             }
         }
         builder.append(")");
-        return this.writeStatements(indent, context, builder.toString(), "");
+
+        if (this.modifiers.contains(JavaSourceModifier.DEFAULT)) {
+            return writeStatements(indent, context, builder.toString(), "");
+        } else {
+            return builder.append(";").toString();
+        }
     }
 
     @Override
