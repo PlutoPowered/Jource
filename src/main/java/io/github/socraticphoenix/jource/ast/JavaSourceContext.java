@@ -21,10 +21,43 @@
  */
 package io.github.socraticphoenix.jource.ast;
 
+import io.github.socraticphoenix.jource.ast.definition.JavaSourceDefinitionType;
 import io.github.socraticphoenix.jource.ast.type.JavaSourceNamespace;
 
 public interface JavaSourceContext {
 
     String nameOf(JavaSourceNamespace namespace);
+
+    JavaSourceDefinitionType parentType();
+
+    default boolean isInterface() {
+        return parentType() == JavaSourceDefinitionType.INTERFACE || isAnnotation();
+    }
+
+    default boolean isClass() {
+        return parentType() == JavaSourceDefinitionType.CLASS || isEnum();
+    }
+
+    default boolean isEnum() {
+        return parentType() == JavaSourceDefinitionType.ENUM;
+    }
+
+    default boolean isAnnotation() {
+        return parentType() == JavaSourceDefinitionType.ANNOTATION;
+    }
+
+    static JavaSourceContext of(JavaSourceContext context, JavaSourceDefinitionType type) {
+        return new JavaSourceContext() {
+            @Override
+            public String nameOf(JavaSourceNamespace namespace) {
+                return context.nameOf(namespace);
+            }
+
+            @Override
+            public JavaSourceDefinitionType parentType() {
+                return type;
+            }
+        };
+    }
 
 }

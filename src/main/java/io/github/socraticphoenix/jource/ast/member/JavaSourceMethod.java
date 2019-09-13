@@ -31,6 +31,7 @@ import io.github.socraticphoenix.jource.ast.modifier.JavaSourceModifier;
 import io.github.socraticphoenix.jource.ast.type.JavaSourceGenerics;
 import io.github.socraticphoenix.jource.ast.type.JavaSourceNamespace;
 import com.gmail.socraticphoenix.parse.Strings;
+import io.github.socraticphoenix.jource.ast.value.JavaSourceValue;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -45,8 +46,9 @@ public class JavaSourceMethod extends AbstractJavaSourceTopBlock<JavaSourceMetho
     private JavaSourceNamespace.Filled returnType;
     private String name;
     private List<JavaSourceParameter> parameters;
+    private JavaSourceValue defaultValue;
 
-    public JavaSourceMethod(JavaSourceGenerics generics, JavaSourceNamespace.Filled returnType, String name) {
+    public JavaSourceMethod(JavaSourceGenerics generics, JavaSourceNamespace.Filled returnType, String name, JavaSourceValue defaultValue) {
         this.generics = generics;
         this.returnType = returnType;
         this.name = name;
@@ -55,8 +57,12 @@ public class JavaSourceMethod extends AbstractJavaSourceTopBlock<JavaSourceMetho
         this.annotations = new ArrayList<>();
     }
 
+    public static JavaSourceMethod of(JavaSourceGenerics generics, JavaSourceNamespace.Filled returnType, String name, JavaSourceValue defaultValue) {
+        return new JavaSourceMethod(generics, returnType, name, defaultValue);
+    }
+
     public static JavaSourceMethod of(JavaSourceGenerics generics, JavaSourceNamespace.Filled returnType, String name) {
-        return new JavaSourceMethod(generics, returnType, name);
+        return of(generics, returnType, name, null);
     }
 
     public JavaSourceGenerics generics() {
@@ -78,7 +84,7 @@ public class JavaSourceMethod extends AbstractJavaSourceTopBlock<JavaSourceMetho
         String ind = Strings.indent(indent);
         String ls = System.lineSeparator();
         this.annotations.forEach(annotation -> builder.append(annotation.write(indent + 1, context)).append(ls).append(ind));
-        this.modifiers.forEach(modifier -> builder.append(modifier.getName()).append(" "));
+        this.modifiers.stream().filter(m -> !context.isInterface() || (m != JavaSourceModifier.ABSTRACT && m != JavaSourceModifier.PUBLIC)).forEach(modifier -> builder.append(modifier.getName()).append(" "));
         if(!this.generics.isEmpty()) {
             builder.append(this.generics.write(indent + 1, context)).append(" ");
         }
@@ -91,10 +97,19 @@ public class JavaSourceMethod extends AbstractJavaSourceTopBlock<JavaSourceMetho
         }
         builder.append(")");
 
-        if (this.modifiers.contains(JavaSourceModifier.DEFAULT)) {
-            return writeStatements(indent, context, builder.toString(), "");
+        if (context.isInterface()) {
+            if (context.isAnnotation()) {
+                if (this.defaultValue != null) {
+                    builder.append(" default ").append(this.defaultValue.write(indent + 1, context));
+                }
+                return builder.append(";").toString();
+            } else if (this.modifiers.contains(JavaSourceModifier.DEFAULT)) {
+                return this.writeStatements(indent, context, builder.toString(), "");
+            } else {
+                return builder.append(";").toString();
+            }
         } else {
-            return builder.append(";").toString();
+            return this.writeStatements(indent, context, builder.toString(), "");
         }
     }
 

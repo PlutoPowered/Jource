@@ -110,19 +110,21 @@ public class JavaSourceInterfaceDefinition extends AbstractJavaSourceDefinition<
 
     @Override
     public String write(int indent, JavaSourceContext context) {
+        JavaSourceContext defContext = JavaSourceContext.of(context, JavaSourceDefinitionType.INTERFACE);
+
         StringBuilder builder = new StringBuilder();
         String ind = Strings.indent(indent);
         String ind2 = Strings.indent(indent + 1);
         String ls = System.lineSeparator();
 
-        this.annotations().forEach(annotation -> builder.append(annotation.write(indent + 1, context)).append(ls).append(ind));
+        this.annotations().forEach(annotation -> builder.append(annotation.write(indent + 1, defContext)).append(ls).append(ind));
         this.modifiers().forEach(modifier -> builder.append(modifier.getName()).append(" "));
-        builder.append("interface ").append(this.name().write(indent + 1, context)).append(" ");
+        builder.append("interface ").append(this.name().write(indent + 1, defContext)).append(" ");
         if(!this.interfaces().isEmpty()) {
             builder.append("extends ");
             int c = 0;
             for(JavaSourceNamespace face : this.interfaces()) {
-                builder.append(face.write(indent + 1, context));
+                builder.append(face.write(indent + 1, defContext));
                 if(c < this.interfaces().size() - 1) {
                     builder.append(", ");
                 }
@@ -131,10 +133,10 @@ public class JavaSourceInterfaceDefinition extends AbstractJavaSourceDefinition<
             builder.append(" ");
         }
         builder.append("{").append(ls);
-        this.fields().forEach(field -> builder.append(ind2).append(field.write(indent + 1, context)).append(ls));
+        this.fields().forEach(field -> builder.append(ind2).append(field.write(indent + 1, defContext)).append(ls));
         builder.append(ls);
-        this.methods().forEach(method -> builder.append(ind2).append(method.write(indent + 1, context)).append(ls).append(ls));
-        this.inners().forEach(inner -> builder.append(ind2).append(inner.write(indent + 1, context)).append(ls).append(ls));
+        this.methods().forEach(method -> builder.append(ind2).append(method.write(indent + 1, defContext)).append(ls).append(ls));
+        this.inners().forEach(inner -> builder.append(ind2).append(inner.write(indent + 1, defContext)).append(ls).append(ls));
         builder.append(ind).append("}");
         return builder.toString();    }
 

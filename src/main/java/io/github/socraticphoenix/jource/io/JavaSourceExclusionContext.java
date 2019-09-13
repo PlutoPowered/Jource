@@ -22,6 +22,7 @@
 package io.github.socraticphoenix.jource.io;
 
 import io.github.socraticphoenix.jource.ast.JavaSourceContext;
+import io.github.socraticphoenix.jource.ast.definition.JavaSourceDefinitionType;
 import io.github.socraticphoenix.jource.ast.type.JavaSourceNamespace;
 
 import java.util.Collection;
@@ -37,4 +38,10 @@ public class JavaSourceExclusionContext implements JavaSourceContext {
     public String nameOf(JavaSourceNamespace namespace) {
         return this.exclude.contains(namespace) ? namespace.getQualifiedName() : namespace.getSimpleName();
     }
+
+    @Override
+    public JavaSourceDefinitionType parentType() {
+        return JavaSourceDefinitionType.CLASS;
+    }
+
 }

@@ -118,14 +118,16 @@ public class JavaSourceAnonymousClass implements JavaSourceValue {
 
     @Override
     public String write(int indent, JavaSourceContext context) {
+        JavaSourceContext defContext = JavaSourceContext.of(context, JavaSourceDefinitionType.CLASS);
+
         StringBuilder builder = new StringBuilder();
         String ind = Strings.indent(indent);
         String ind2 = Strings.indent(indent + 1);
         String ls = System.lineSeparator();
 
-        builder.append("new ").append(this.superclass.write(indent + 1, context)).append("(");
+        builder.append("new ").append(this.superclass.write(indent + 1, defContext)).append("(");
         for (int i = 0; i < this.parameters.size(); i++) {
-            builder.append(this.parameters.get(i).write(indent + 1, context));
+            builder.append(this.parameters.get(i).write(indent + 1, defContext));
             if(i < this.parameters.size() - 1) {
                 builder.append(", ");
             }
@@ -133,18 +135,18 @@ public class JavaSourceAnonymousClass implements JavaSourceValue {
 
 
         builder.append("){").append(ls);
-        this.fields().forEach(field -> builder.append(ind2).append(field.write(indent + 1, context)).append(ls));
+        this.fields().forEach(field -> builder.append(ind2).append(field.write(indent + 1, defContext)).append(ls));
         builder.append(ls);
-        this.staticInitializers().forEach(staticInitializer -> builder.append(ind2).append(staticInitializer.write(indent + 1, context)).append(ls));
+        this.staticInitializers().forEach(staticInitializer -> builder.append(ind2).append(staticInitializer.write(indent + 1, defContext)).append(ls));
         if (!this.staticInitializers().isEmpty()) {
             builder.append(ls);
         }
-        this.initializers().forEach(initializer -> builder.append(ind2).append(initializer.write(indent + 1, context)).append(ls));
+        this.initializers().forEach(initializer -> builder.append(ind2).append(initializer.write(indent + 1, defContext)).append(ls));
         if (!this.initializers().isEmpty()) {
             builder.append(ls);
         }
-        this.methods().forEach(method -> builder.append(ind2).append(method.write(indent + 1, context)).append(ls).append(ls));
-        this.inners().forEach(inner -> builder.append(ind2).append(inner.write(indent + 1, context)).append(ls).append(ls));
+        this.methods().forEach(method -> builder.append(ind2).append(method.write(indent + 1, defContext)).append(ls).append(ls));
+        this.inners().forEach(inner -> builder.append(ind2).append(inner.write(indent + 1, defContext)).append(ls).append(ls));
         builder.append(ind).append("}");
         return builder.toString();
     }
