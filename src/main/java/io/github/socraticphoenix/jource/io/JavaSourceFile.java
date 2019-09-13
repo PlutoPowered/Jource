@@ -97,13 +97,15 @@ public class JavaSourceFile {
     }
 
     public void writeTo(File file) throws IOException {
+        file.getParentFile().mkdirs();
+        file.createNewFile();
         FileWriter writer = new FileWriter(file);
         writer.append(this.write());
         writer.close();
     }
 
     public void writeAt(File dir) throws IOException {
-        File target = new File(dir, Strings.glue(File.separator, (Object[]) this.main.name().getPath()));
+        File target = new File(dir, Strings.glue(File.separator, (Object[]) this.main.name().getPath()) + ".java");
         this.writeTo(target);
     }
 
