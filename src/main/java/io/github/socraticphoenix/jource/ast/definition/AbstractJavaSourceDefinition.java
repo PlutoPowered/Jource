@@ -76,7 +76,6 @@ public abstract class AbstractJavaSourceDefinition<T extends AbstractJavaSourceD
     @Override
     public List<JavaSourceNamespace> associatedTypes() {
         List<JavaSourceNamespace> associated = new ArrayList<>();
-        associated.add(this.name);
         associated.add(this.superclass);
         associated.addAll(this.interfaces);
         this.initializers.forEach(v -> associated.addAll(v.associatedTypes()));

@@ -58,7 +58,7 @@ public class JavaSourceFile {
         List<JavaSourceNamespace> associated = main.associatedTypes();
         this.additional.forEach(s -> associated.addAll(s.associatedTypes()));
         for (JavaSourceNamespace sourceNamespace : associated) {
-            if(!this.imports.contains(sourceNamespace) && !this.literals.contains(sourceNamespace)) {
+            if(!sourceNamespace.isPrimitive() && !this.imports.contains(sourceNamespace) && !this.literals.contains(sourceNamespace)) {
                 if (!imports.contains(sourceNamespace.getSimpleName())) {
                     this.imports.add(sourceNamespace);
                     imports.add(sourceNamespace.getSimpleName());
@@ -84,6 +84,7 @@ public class JavaSourceFile {
         JavaSourceContext context = new JavaSourceExclusionContext(this.literals);
         int indent = 0;
         StringBuilder builder = new StringBuilder();
+        builder.append(this.main.name().toPackageStatement()).append(";").append(System.lineSeparator()).append(System.lineSeparator());
         this.imports.forEach(jcn -> builder.append(jcn.toImportStatement()).append(";").append(System.lineSeparator()));
         builder.append(this.main.write(indent, context));
         builder.append(System.lineSeparator());
