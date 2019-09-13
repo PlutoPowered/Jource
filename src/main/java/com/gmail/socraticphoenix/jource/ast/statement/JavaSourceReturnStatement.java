@@ -55,7 +55,7 @@ public class JavaSourceReturnStatement implements JavaSourceStatement {
 
     @Override
     public List<JavaSourceNamespace> associatedTypes() {
-        return Collections.emptyList();
+        return this.value.associatedTypes();
     }
 
     @Override

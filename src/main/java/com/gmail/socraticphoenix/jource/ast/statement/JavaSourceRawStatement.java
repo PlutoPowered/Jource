@@ -34,7 +34,7 @@ public class JavaSourceRawStatement implements JavaSourceStatement {
         this.content = content;
     }
 
-    public JavaSourceRawStatement of(String content) {
+    public static JavaSourceRawStatement of(String content) {
         return new JavaSourceRawStatement(content);
     }
 
