@@ -24,11 +24,16 @@ package io.github.socraticphoenix.jource.ast.definition;
 import com.gmail.socraticphoenix.parse.Strings;
 import io.github.socraticphoenix.jource.ast.JavaSourceContext;
 import io.github.socraticphoenix.jource.ast.type.JavaSourceGenerics;
+import io.github.socraticphoenix.jource.ast.type.JavaSourceNamespace;
 
 public class JavaSourceAnnotationDefinition extends AbstractJavaSourceDefinition<JavaSourceAnnotationDefinition> {
 
     public JavaSourceAnnotationDefinition(String name) {
         super(name, JavaSourceGenerics.empty());
+    }
+
+    public JavaSourceAnnotationDefinition(JavaSourceNamespace name) {
+        super(name);
     }
 
     @Override
