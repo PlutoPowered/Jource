@@ -57,6 +57,7 @@ public class JavaSourceMethod extends AbstractJavaSourceTopBlock<JavaSourceMetho
         this.parameters = new ArrayList<>();
         this.annotations = new ArrayList<>();
         this.throwables = new ArrayList<>();
+        this.defaultValue = defaultValue;
     }
 
     public static JavaSourceMethod of(JavaSourceGenerics generics, JavaSourceNamespace.Filled returnType, String name, JavaSourceValue defaultValue) {

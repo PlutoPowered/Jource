@@ -21,5 +21,34 @@
  */
 package io.github.socraticphoenix.jource.ast.definition;
 
-public class JavaSourceAnnotationDefinition {
+import com.gmail.socraticphoenix.parse.Strings;
+import io.github.socraticphoenix.jource.ast.JavaSourceContext;
+import io.github.socraticphoenix.jource.ast.type.JavaSourceGenerics;
+
+public class JavaSourceAnnotationDefinition extends AbstractJavaSourceDefinition<JavaSourceAnnotationDefinition> {
+
+    public JavaSourceAnnotationDefinition(String name) {
+        super(name, JavaSourceGenerics.empty());
+    }
+
+    @Override
+    public String write(int indent, JavaSourceContext context) {
+        JavaSourceContext defContext = JavaSourceContext.of(context, JavaSourceDefinitionType.ANNOTATION);
+
+        StringBuilder builder = new StringBuilder();
+        String ind = Strings.indent(indent);
+        String ind2 = Strings.indent(indent + 1);
+        String ls = System.lineSeparator();
+
+        this.annotations().forEach(annotation -> builder.append(annotation.write(indent + 1, defContext)).append(ls).append(ind));
+        this.modifiers().forEach(modifier -> builder.append(modifier.getName()).append(" "));
+        builder.append("#interface ").append(this.name().write(indent + 1, defContext)).append(" ");
+        builder.append("{").append(ls);
+        this.fields().forEach(field -> builder.append(ind2).append(field.write(indent + 1, defContext)).append(ls));
+        builder.append(ls);
+        this.methods().forEach(method -> builder.append(ind2).append(method.write(indent + 1, defContext)).append(ls).append(ls));
+        this.inners().forEach(inner -> builder.append(ind2).append(inner.write(indent + 1, defContext)).append(ls).append(ls));
+        builder.append(ind).append("}");
+        return builder.toString();
+    }
 }

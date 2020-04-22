@@ -138,6 +138,7 @@ public class JavaSourceInterfaceDefinition extends AbstractJavaSourceDefinition<
         this.methods().forEach(method -> builder.append(ind2).append(method.write(indent + 1, defContext)).append(ls).append(ls));
         this.inners().forEach(inner -> builder.append(ind2).append(inner.write(indent + 1, defContext)).append(ls).append(ls));
         builder.append(ind).append("}");
-        return builder.toString();    }
+        return builder.toString();
+    }
 
 }
