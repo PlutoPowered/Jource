@@ -85,8 +85,10 @@ public class JavaSourceFile {
 
     public String write() {
         this.buildImports();
+        return this.write(new JavaSourceExclusionContext(this.literals));
+    }
 
-        JavaSourceContext context = new JavaSourceExclusionContext(this.literals);
+    public String write(JavaSourceContext context) {
         int indent = 0;
         StringBuilder builder = new StringBuilder();
         builder.append(this.main.name().toPackageStatement()).append(";").append(System.lineSeparator()).append(System.lineSeparator());
