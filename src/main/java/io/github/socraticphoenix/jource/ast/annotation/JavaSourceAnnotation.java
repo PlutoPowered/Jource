@@ -42,14 +42,10 @@ public class JavaSourceAnnotation implements JavaSourceTyped, JavaSourceWritable
     private JavaSourceNamespace type;
     private Map<String, JavaSourceAnnotationValue> values;
 
-    public JavaSourceAnnotation(String name) {
-        Class<?> c = Reflections.resolveClass(name).orElse(null);
-        if (c != null && !Annotation.class.isAssignableFrom(c)) {
-            throw new IllegalArgumentException(name + " is not an Annotation");
-        }
-        this.bounds = (Class<? extends Annotation>) c;
+    public JavaSourceAnnotation(JavaSourceNamespace name) {
+        this.bounds = name.getRepresented().orElse(null);
         this.values = new LinkedHashMap<>();
-        this.type = JavaSourceNamespace.of(name, JavaSourceGenerics.empty());
+        this.type = name;
     }
 
     public JavaSourceAnnotation(Class<? extends Annotation> clazz) {
