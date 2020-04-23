@@ -46,6 +46,20 @@ public interface JavaSourceContext {
         return parentType() == JavaSourceDefinitionType.ANNOTATION;
     }
 
+    static JavaSourceContext qualified() {
+        return new JavaSourceContext() {
+            @Override
+            public String nameOf(JavaSourceNamespace namespace) {
+                return namespace.getQualifiedName();
+            }
+
+            @Override
+            public JavaSourceDefinitionType parentType() {
+                return JavaSourceDefinitionType.CLASS;
+            }
+        };
+    }
+
     static JavaSourceContext of(JavaSourceContext context, JavaSourceDefinitionType type) {
         return new JavaSourceContext() {
             @Override

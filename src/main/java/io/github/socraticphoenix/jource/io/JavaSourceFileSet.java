@@ -21,6 +21,8 @@
  */
 package io.github.socraticphoenix.jource.io;
 
+import io.github.socraticphoenix.jource.ast.JavaSourceContext;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -36,6 +38,12 @@ public class JavaSourceFileSet {
     public JavaSourceFileSet add(JavaSourceFile file) {
         this.files.add(file);
         return this;
+    }
+
+    public void write(File dir, JavaSourceContext context) throws IOException {
+        for (JavaSourceFile file : this.files) {
+            file.writeAt(dir, context);
+        }
     }
 
     public void write(File dir) throws IOException {

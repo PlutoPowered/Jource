@@ -106,16 +106,26 @@ public class JavaSourceFile {
     }
 
     public void writeTo(File file) throws IOException {
-        file.getParentFile().mkdirs();
-        file.createNewFile();
-        FileWriter writer = new FileWriter(file);
-        writer.append(this.write());
-        writer.close();
+        this.buildImports();
+        this.writeTo(file, new JavaSourceExclusionContext(this.literals));
     }
 
     public void writeAt(File dir) throws IOException {
+        this.buildImports();
+        this.writeAt(dir, new JavaSourceExclusionContext(this.literals));
+    }
+
+    public void writeTo(File file, JavaSourceContext context) throws IOException {
+        file.getParentFile().mkdirs();
+        file.createNewFile();
+        FileWriter writer = new FileWriter(file);
+        writer.append(this.write(context));
+        writer.close();
+    }
+
+    public void writeAt(File dir, JavaSourceContext context) throws IOException {
         File target = new File(dir, Strings.glue(File.separator, (Object[]) this.main.name().getPath()) + ".java");
-        this.writeTo(target);
+        this.writeTo(target, context);
     }
 
 }
