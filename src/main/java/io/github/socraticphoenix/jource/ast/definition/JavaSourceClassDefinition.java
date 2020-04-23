@@ -55,7 +55,7 @@ public class JavaSourceClassDefinition extends AbstractJavaSourceDefinition<Java
 
         this.annotations().forEach(annotation -> builder.append(annotation.write(indent + 1, defContext)).append(ls).append(ind));
         this.modifiers().forEach(modifier -> builder.append(modifier.getName()).append(" "));
-        builder.append("class ").append(this.name().write(indent + 1, defContext)).append(" extends ").append(this.superclass().write(indent + 1, defContext)).append(" ");
+        builder.append("class ").append(this.name().getSimpleName()).append(" extends ").append(this.superclass().write(indent + 1, defContext)).append(" ");
         if(!this.interfaces().isEmpty()) {
             builder.append("implements ");
             int c = 0;

@@ -119,7 +119,7 @@ public class JavaSourceInterfaceDefinition extends AbstractJavaSourceDefinition<
 
         this.annotations().forEach(annotation -> builder.append(annotation.write(indent + 1, defContext)).append(ls).append(ind));
         this.modifiers().forEach(modifier -> builder.append(modifier.getName()).append(" "));
-        builder.append("interface ").append(this.name().write(indent + 1, defContext)).append(" ");
+        builder.append("interface ").append(this.name().getSimpleName()).append(" ");
         if(!this.interfaces().isEmpty()) {
             builder.append("extends ");
             int c = 0;

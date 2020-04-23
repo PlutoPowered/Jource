@@ -47,7 +47,7 @@ public class JavaSourceAnnotationDefinition extends AbstractJavaSourceDefinition
 
         this.annotations().forEach(annotation -> builder.append(annotation.write(indent + 1, defContext)).append(ls).append(ind));
         this.modifiers().forEach(modifier -> builder.append(modifier.getName()).append(" "));
-        builder.append("@interface ").append(this.name().write(indent + 1, defContext)).append(" ");
+        builder.append("@interface ").append(this.name().getSimpleName()).append(" ");
         builder.append("{").append(ls);
         this.fields().forEach(field -> builder.append(ind2).append(field.write(indent + 1, defContext)).append(ls));
         builder.append(ls);
