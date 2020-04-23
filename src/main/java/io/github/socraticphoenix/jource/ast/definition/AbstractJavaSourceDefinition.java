@@ -94,6 +94,7 @@ public abstract class AbstractJavaSourceDefinition<T extends AbstractJavaSourceD
 
     @Override
     public T addAnnotation(JavaSourceAnnotation annotation) {
+        this.annotations.add(annotation);
         return (T) this;
     }
 
